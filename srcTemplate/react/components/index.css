@@ -1,0 +1,7 @@
+.greeting {
+    position: absolute;
+    margin-left: 50%;
+    margin-top: 300px;
+    transform: translateX(-50%);
+    font-size: 60px;
+}
