@@ -1,6 +1,10 @@
 const  chalk = require("chalk");
 
-module.exports = {
+type chalkFuncsType = {
+    [index: string]: (arg: string) => string
+}
+
+const chalkFuncs: chalkFuncsType = {
     keyword(arg){
         return chalk.bgCyan(arg);
     },
@@ -14,3 +18,4 @@ module.exports = {
         return chalk.blue(arg);
     }
 }
+module.exports = chalkFuncs;

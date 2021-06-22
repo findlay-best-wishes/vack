@@ -3,9 +3,9 @@ const spawnSync = spawn.sync;
 const fs = require('fs');
 const path = require('path');
 
-function run({name, withReact, withTs}){
+module.exports =  ({name, withReact, withTs}: {name: string, withReact: boolean, withTs: boolean}) => {
     const projectDir = path.join(process.cwd(), name);
-    const cliDir = path.join(__dirname, "../");
+    const cliDir = path.join(__dirname, "../../");
     
     npmModuleInit();
     generateFiles();
@@ -17,29 +17,28 @@ function run({name, withReact, withTs}){
         spawnSync('npm', ['init', '-y']);
     }
     
-
-
     function installDeps(){
 
         //构建依赖列表
-        const commonDevDeps = ["webpack", "webpack-cli", "webpack-dev-server", "webpack-merge", 
+        type  DepsType = string[];
+        const commonDevDeps: DepsType = ["webpack", "webpack-cli", "webpack-dev-server", "webpack-merge", 
             "html-webpack-plugin", "css-loader", "style-loader",
             "babel-loader", "@babel/core", "@babel/preset-env"
         ];
-        const devDepsForReact = ["@babel/preset-react"];
-        const devDepsForVue = ["vue-loader@next", "@vue/compiler-sfc"];
-        const depsForReact = ["react", "react-dom", "react-router", "react-router-dom", "react-document-title"];
-        const depsForVue = ["vue@next", "@vue/runtime-core"];
+        const devDepsForReact: DepsType = ["@babel/preset-react"];
+        const devDepsForVue: DepsType = ["vue-loader@next", "@vue/compiler-sfc"];
+        const depsForReact: DepsType = ["react", "react-dom", "react-router", "react-router-dom", "react-document-title"];
+        const depsForVue: DepsType = ["vue@next", "@vue/runtime-core"];
         process.chdir(projectDir);
         //安装开发依赖
-        spawn("npm", ['install', '-D', ...commonDevDeps]
+        spawnSync("npm", ['install', '-D', ...commonDevDeps]
             .concat(withReact ? devDepsForReact : devDepsForVue)
             .concat(withTs ? "@babel/preset-typescript" : []), { 
             stdio: 'inherit' 
         });
 
         //安装生产依赖
-        spawn("npm", ['install'].concat(withReact ? depsForReact : depsForVue), {
+        spawnSync("npm", ['install'].concat(withReact ? depsForReact : depsForVue), {
             stdio: "inherit"
         })
     }
@@ -48,7 +47,7 @@ function run({name, withReact, withTs}){
         dirsInit();
 
         //脚手架中文件地址到项目文件地址的映射
-        const srcToProjMapped = {
+        const srcToProjMapped: {[index: string]: string} = {
             "config/webpack.dev.js": "build/webpack.dev.js",
             "config/webpack.prod.js": "build/webpack.prod.js",
             [`config/${withReact ? "react" : "vue"}.common.js`]: "build/webpack.common.js",
@@ -96,6 +95,4 @@ function run({name, withReact, withTs}){
             fs.writeFileSync("package.json", JSON.stringify(pkgJson, null, 4));
         } 
     }
-}    
-
-module.exports = run;
+}   
