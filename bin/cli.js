@@ -1,5 +1,4 @@
 #! /usr/bin/env node
-// dev
 const inquirer = require('inquirer');
 const { program } = require('commander');
 const {task, error, guide} = require('../lib/chalk');
