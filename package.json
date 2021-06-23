@@ -1,6 +1,6 @@
 {
   "name": "vack",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "a cli based on webapck for react and vue",
   "bin": "/bin/vack.js",
   "scripts": {
