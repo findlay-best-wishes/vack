@@ -1,9 +1,9 @@
 import React from 'react';
 import Greeting from './components/greeting';
-import "./index.css";
+import './index.css';
 
 export default () => (
-    <div className="app"> 
-        <Greeting />
-    </div>
-)
+  <div className="app">
+    <Greeting />
+  </div>
+);

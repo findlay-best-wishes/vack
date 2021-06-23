@@ -28,14 +28,15 @@
         ],
         "quotes": [
             "error",
-            "double"
+            "single"
         ],
         "semi": [
             "error",
             "always"
         ],
+        "no-mixed-spaces-and-tabs": 0,
+        "no-process-exit": 0,
         "@typescript-eslint/no-var-requires": 0,
-        "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
         "node/exports-style": ["error", "module.exports"],
         "node/file-extension-in-import": ["error", "always"],
         "node/prefer-global/buffer": ["error", "always"],
@@ -44,6 +45,38 @@
         "node/prefer-global/url-search-params": ["error", "always"],
         "node/prefer-global/url": ["error", "always"],
         "node/prefer-promises/dns": "error",
-        "node/prefer-promises/fs": "error"
-    }
+        "node/prefer-promises/fs": "error",
+        "node/no-unsupported-features/es-syntax": "off",
+        "node/no-missing-import": [
+            "error",
+            {
+                "allowModules": ["pnpapi"],
+                "tryExtensions": [".tsx", ".ts", ".jsx", ".js", ".d.ts"]
+            }
+        ],
+        "node/no-missing-require": [
+            "error",
+            {
+                "allowModules": ["pnpapi"],
+                "tryExtensions": [".ts", ".js", ".d.ts"]
+            }
+        ],
+        "node/no-unsupported-features/node-builtins": 0
+    },
+    "overrides": [
+        {
+            "files": ["config/**", "template/**"],
+            "rules": {
+                "no-console": ["error"],
+                "node/no-missing-import": "off",
+                "node/no-missing-require": "off"
+            }
+        }
+        /* {
+            "files": ["config/**", "template/**", "dist/**"],
+            "rules": {
+                "spaced-comment": ["error", "always", { "exceptions": ["-", "+"] }]
+            }
+        } */
+    ]
 }

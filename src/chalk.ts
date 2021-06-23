@@ -1,20 +1,20 @@
-const  chalk = require("chalk");
+const chalk = require('chalk');
 
 type chalkFuncsType = {
-    [index: string]: (arg: string) => string
-}
+  [index: string]: (arg: string) => string;
+};
 
 const chalkFuncs: chalkFuncsType = {
-	keyword(arg){
+	keyword(arg) {
 		return chalk.bgCyan(arg);
 	},
-	task(arg){
+	task(arg) {
 		return chalk.bold.bgGreen(arg);
 	},
-	error(arg){
+	error(arg) {
 		return chalk.bgRed(arg);
 	},
-	guide(arg){
+	guide(arg) {
 		return chalk.blue(arg);
 	}
 };

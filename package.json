@@ -5,7 +5,9 @@
   "bin": "/bin/vack.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf ./dist && npx tsc"
+    "build": "rm -rf ./dist && npx tsc && npm run prettier && npm run lint",
+    "lint": "npx eslint bin config dist src template --fix",
+    "prettier": "npx prettier --write bin config dist src template"
   },
   "keywords": [
     "webpack",
@@ -34,6 +36,7 @@
     "@typescript-eslint/parser": "^4.28.0",
     "eslint": "^7.29.0",
     "eslint-plugin-node": "^11.1.0",
+    "prettier": "2.3.1",
     "typescript": "^4.3.4"
   }
 }

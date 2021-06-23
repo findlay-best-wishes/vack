@@ -1,1 +1,1 @@
-require("../dist/command");
+require('../dist/command');
