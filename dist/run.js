@@ -4,26 +4,26 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from) {
         to[j] = from[i];
     return to;
 };
-var spawn = require('cross-spawn');
+var spawn = require("cross-spawn");
 var spawnSync = spawn.sync;
-var fs = require('fs');
-var path = require('path');
+var fs = require("fs");
+var path = require("path");
 module.exports = function (_a) {
     var name = _a.name, withReact = _a.withReact, withTs = _a.withTs;
     var projectDir = path.join(process.cwd(), name);
-    var cliDir = path.join(__dirname, "../../");
+    var cliDir = path.join(__dirname, "../");
     npmModuleInit();
     generateFiles();
     installDeps();
     function npmModuleInit() {
         fs.existsSync(projectDir) ? (console.log("project existed")) : (fs.mkdirSync(projectDir));
         process.chdir(name);
-        spawnSync('npm', ['init', '-y']);
+        spawnSync("npm", ["init", "-y"]);
     }
     function installDeps() {
-        var commonDevDeps = ["webpack", "webpack-cli", "webpack-dev-server", "webpack-merge",
-            "html-webpack-plugin", "css-loader", "style-loader",
-            "babel-loader", "@babel/core", "@babel/preset-env"
+        var commonDevDeps = [
+            "webpack", "webpack-cli", "webpack-dev-server", "webpack-merge", "html-webpack-plugin", "css-loader",
+            "style-loader", "babel-loader", "@babel/core", "@babel/preset-env"
         ];
         var devDepsForReact = ["@babel/preset-react"];
         var devDepsForVue = ["vue-loader@next", "@vue/compiler-sfc"];
@@ -31,12 +31,12 @@ module.exports = function (_a) {
         var depsForVue = ["vue@next", "@vue/runtime-core"];
         process.chdir(projectDir);
         //安装开发依赖
-        spawnSync("npm", __spreadArray(['install', '-D'], commonDevDeps).concat(withReact ? devDepsForReact : devDepsForVue)
+        spawnSync("npm", __spreadArray(["install", "-D"], commonDevDeps).concat(withReact ? devDepsForReact : devDepsForVue)
             .concat(withTs ? "@babel/preset-typescript" : []), {
-            stdio: 'inherit'
+            stdio: "inherit"
         });
         //安装生产依赖
-        spawnSync("npm", ['install'].concat(withReact ? depsForReact : depsForVue), {
+        spawnSync("npm", ["install"].concat(withReact ? depsForReact : depsForVue), {
             stdio: "inherit"
         });
     }

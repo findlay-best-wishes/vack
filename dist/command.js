@@ -1,9 +1,8 @@
-#! /usr/bin/env node
 "use strict";
-var inquirer = require('inquirer');
-var program = require('commander').program;
-var _a = require('../lib/chalk'), task = _a.task, error = _a.error, guide = _a.guide;
-var spawnOwner = require('cross-spawn');
+var inquirer = require("inquirer");
+var program = require("commander").program;
+var _a = require("./chalk"), task = _a.task, error = _a.error, guide = _a.guide;
+var spawnOwner = require("cross-spawn");
 var options = { name: "my-app" }; //配置信息
 commanderInit(); //初始化命令行，获取参数
 //设置对话栏，进一步完善配置信息
@@ -12,7 +11,7 @@ inquirerInit().then(function () {
     delete options.vue;
     delete options.react;
     console.log("\n", task("We're going to create new project named " + options.name + " with " + framework + (options.withTs ? " and typescript" : ""), "\n"));
-    require("../lib/run")(options);
+    require("./run")(options);
     usageGuide(options.name);
 }).catch(function (e) {
     console.log(e);
@@ -20,15 +19,15 @@ inquirerInit().then(function () {
     process.exit(1);
 });
 function commanderInit() {
-    program.version(require("../../package.json")["version"]);
+    program.version(require("../package.json")["version"]);
     program
-        .command('create [name]')
+        .command("create [name]")
         .description("create new project")
         .action(function (name) { return options.name = name; });
     program
-        .option('--vue', 'use vue as ui framework')
-        .option('--react', 'use react as ui framework')
-        .option('--ts', 'use typescript');
+        .option("--vue", "use vue as ui framework")
+        .option("--react", "use react as ui framework")
+        .option("--ts", "use typescript");
     program.parse(process.argv);
     if (program.opts().ts)
         options.withTs = true;
@@ -78,4 +77,4 @@ var usageGuide = function (dir) {
     console.log("\n\tthen you can exec " + guide("npm start") + " or " + guide("npm run build"));
 };
 module.exports = options;
-//# sourceMappingURL=cli.js.map
+//# sourceMappingURL=command.js.map

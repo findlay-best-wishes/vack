@@ -2,10 +2,10 @@
   "name": "vack",
   "version": "1.0.9",
   "description": "a cli based on webapck for react and vue",
-  "bin": "/dist/bin/cli.js",
+  "bin": "/bin/vack.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx tsc"
+    "build": "rm -rf ./dist && npx tsc"
   },
   "keywords": [
     "webpack",
@@ -30,6 +30,10 @@
     "@babel/preset-typescript": "^7.14.5",
     "@types/inquirer": "^7.3.2",
     "@types/node": "^15.12.4",
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
+    "eslint": "^7.29.0",
+    "eslint-plugin-node": "^11.1.0",
     "typescript": "^4.3.4"
   }
 }
